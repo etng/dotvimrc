@@ -28,3 +28,6 @@
 [submodule "bundle/open_file_under_cursor.vim"]
 	path = bundle/open_file_under_cursor.vim
 	url = git://github.com/amix/open_file_under_cursor.vim.git
+[submodule "bundle/vim-less"]
+	path = bundle/vim-less
+	url = https://github.com/groenewege/vim-less
