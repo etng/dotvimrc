@@ -49,3 +49,6 @@
 [submodule "bundle/nerdtree"]
 	path = bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
+[submodule "visualmark.vim"]
+	path = visualmark.vim
+	url = git://github.com/zhisheng/visualmark.vim.git
