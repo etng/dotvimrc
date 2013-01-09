@@ -25,3 +25,6 @@
 [submodule "bundle/vim-surround"]
 	path = bundle/vim-surround
 	url = git://github.com/tpope/vim-surround.git
+[submodule "bundle/open_file_under_cursor.vim"]
+	path = bundle/open_file_under_cursor.vim
+	url = git://github.com/amix/open_file_under_cursor.vim.git
