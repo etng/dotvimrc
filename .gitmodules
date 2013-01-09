@@ -52,3 +52,6 @@
 [submodule "visualmark.vim"]
 	path = visualmark.vim
 	url = git://github.com/zhisheng/visualmark.vim.git
+[submodule "bufexplorer.vim"]
+	path = bufexplorer.vim
+	url = git://github.com/vim-scripts/bufexplorer.zip.git
