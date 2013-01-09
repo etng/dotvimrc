@@ -43,3 +43,6 @@
 [submodule "bundle/vim-powerline"]
 	path = bundle/vim-powerline
 	url = git://github.com/Lokaltog/vim-powerline.git
+[submodule "bundle/vim-taglist-plus"]
+	path = bundle/vim-taglist-plus
+	url = git://github.com/int3/vim-taglist-plus.git
