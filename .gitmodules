@@ -46,3 +46,6 @@
 [submodule "bundle/vim-taglist-plus"]
 	path = bundle/vim-taglist-plus
 	url = git://github.com/int3/vim-taglist-plus.git
+[submodule "bundle/nerdtree"]
+	path = bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
