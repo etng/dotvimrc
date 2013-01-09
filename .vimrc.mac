@@ -1,0 +1,3 @@
+source ~/.vim/.vimrc
+" run this first: brew install ctags-exuberant
+let Tlist_Ctags_Cmd='/usr/local/bin/ctags'

@@ -19,7 +19,7 @@ set mouse=
 "}}
 
 "tabs, 通过ctrl+h/l来切换标签
-"let mapleader=','
+let mapleader=','
 nnoremap <C-l> gt
 nnoremap <C-h> gT
 nnoremap <leader>te :tabe<CR>
@@ -37,6 +37,7 @@ filetype plugin indent on
 "pathogen{
 call pathogen#infect()
 "}
+colorscheme symfony
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
 map <leader>t :TlistToggle<CR>
 let g:syntastic_auto_loc_list=1
