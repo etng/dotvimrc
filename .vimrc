@@ -1,11 +1,19 @@
 syntax on
 "common conf {{
+set lazyredraw
+set magic
 set ai
 set bs=2
 set showmatch
 set laststatus=2
 set expandtab
+set smarttab
+set lbr
+set tw=500
+set smartindent
+set wrap
 set shiftwidth=4
+set tabstop=4
 set cursorline
 set number
 set autoread
@@ -69,6 +77,10 @@ map <C-l> <C-w>l
 " Remap VIM 0 to first non-blank character
 map 0 ^
 
+" Map <Space> to / (search)
+map <space> /
+
+
 " Shortcuts using <leader>
 map <leader>sn ]s
 map <leader>sp [s
@@ -123,3 +135,17 @@ cnoremap <C-K> <C-U>
 
 cnoremap <C-P> <Up>
 cnoremap <C-N> <Down>           
+
+" Remove the Windows ^M - when the encodings gets messed up
+noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+
+if has("win16") || has("win32")
+else
+    let g:yankring_history_dir = '~/.vim/tmp/'
+endif
+
+try
+    set undodir=~/.vim/tmp/undos
+    set undofile
+catch
+endtry
