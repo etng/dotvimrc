@@ -18,11 +18,13 @@ set foldmethod=syntax
 set mouse=
 "}}
 
-"tabs, 通过ctrl+h/l来切换标签
-let mapleader=','
-nnoremap <C-l> gt
-nnoremap <C-h> gT
-nnoremap <leader>te :tabe<CR>
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = ","
+let g:mapleader = ","
+
+" Fast saving
+nmap <leader>w :w!<cr>
 
 "config plugins{{
 "status line
@@ -36,35 +38,88 @@ filetype plugin indent on
 
 "pathogen{
 call pathogen#infect()
+" call pathogen#helptags()
 "}
-colorscheme symfony
+
+try
+        colorscheme symfony
+catch
+endtry
+
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
 map <leader>t :TlistToggle<CR>
 let g:syntastic_auto_loc_list=1
 let Tlist_Use_Right_Window = 1
 "}}
-"Fast editing of .vimrc
-map <silent> <leader>ee :e ~/.vimrc<cr>
-"When .vimrc is edited, reload it
-autocmd! bufwritepost .vimrc source ~/.vimrc 
 
 " tab navigation
-nnoremap tl :tabnext<CR>
-nnoremap th :tabprev<CR>
-nnoremap tn :tabnew<CR>
-nnoremap tc :tabclose<CR>
+map <leader>tl :tabnext<CR>
+map <leader>th :tabprev<CR>
+map <leader>tn :tabnew<CR>
+map <leader>tc :tabclose<CR>
+map <leader>tm :tabmoveCR>
+map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+map <leader>cd :cd %p:h<cr>;pwd<cr>
 
-nnoremap <leader>w <C-w>v<C-w>l
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
+" Remap VIM 0 to first non-blank character
+map 0 ^
+
+" Shortcuts using <leader>
+map <leader>sn ]s
+map <leader>sp [s
+map <leader>sa zg
+map <leader>s? z=
+
+" Delete trailing white space on save, useful for Python and CoffeeScript ;)
+func! DeleteTrailingWS()
+      exe "normal mz"
+        %s/\s\+$//ge
+          exe "normal `z"
+      endfunc
+autocmd BufWrite *.py :call DeleteTrailingWS()
+autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
 au FileType php call AddPHPFunctionDict()
+
 
 function AddPHPFunctionDict()
     set dict-=~/php.dict dict+=~/php.dict
     set complete-=k complete+=k
 endfunction
 
-command CDC cd %:p:h
+map <leader>nn :NERDTreeToggle<cr>
+map <leader>nb :NERDTreeFromBookmark 
+map <leader>nf :NERDTreeFind<cr>
+
+ino <c-j> <c-r>=snipMate#TriggerSnippet()<cr>
+snor <c-j> <esc>i<right><c-r>=snipMate#TriggerSnippet()<cr>
+
+let g:ctrlp_working_path_mode = 0
+
+let g:ctrlp_map = '<c-f>'
+map <c-b> :CtrlPBuffer<cr>
+
+let g:ctrlp_max_height = 20
+let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
+
+let MRU_Max_Entries = 400
+map <leader>f :MRU<CR>
+
+let g:bufExplorerDefaultHelp=0
+let g:bufExplorerShowRelativePath=1
+let g:bufExplorerFindActive=1
+let g:bufExplorerSortBy='name'
+map <leader>o :BufExplorer<cr>
+
+" Bash like keys for the command line
+cnoremap <C-A> <Home>
+cnoremap <C-E> <End>
+cnoremap <C-K> <C-U>
+
+cnoremap <C-P> <Up>
+cnoremap <C-N> <Down>           
