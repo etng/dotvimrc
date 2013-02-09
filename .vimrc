@@ -65,9 +65,10 @@ map <leader>tl :tabnext<CR>
 map <leader>th :tabprev<CR>
 map <leader>tn :tabnew<CR>
 map <leader>tc :tabclose<CR>
-map <leader>tm :tabmoveCR>
+map <leader>tm :tabmove<CR>
 map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 map <leader>cd :cd %p:h<cr>;pwd<cr>
+map <leader>wtt <C-w>T
 
 map <C-h> <C-w>h
 map <C-j> <C-w>j
@@ -149,3 +150,80 @@ try
     set undofile
 catch
 endtry
+" autopen NERDTree and focus cursor in new document  
+autocmd VimEnter * NERDTree  
+autocmd VimEnter * wincmd p  
+
+" Unicode characters can be inserted by typing ctrl-vu followed by the 4 digit hexadecimal code.
+
+" Symbol	Unicode	Name
+" ¬	U+00AC	not sign
+" ▸	U+25B8	black right-pointing small triangle
+" ☠	U+2620	skull and crossbones
+" ❤	U+2764	heavy black heart
+" ‽	U+203d	interobang
+
+" Shortcut to rapidly toggle `set list`
+nmap <leader>l :set list!<CR>
+ 
+" Use the same symbols as TextMate for tabstops and EOLs
+set listchars=tab:▸\ ,eol:¬
+
+" Only do this part when compiled with support for autocommands
+if has("autocmd")
+  " Enable file type detection
+  filetype on
+   
+  " Syntax of these languages is fussy over tabs Vs spaces
+  autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
+  autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+   
+  " Customisations based on house-style (arbitrary)
+  autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
+  autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
+  autocmd FileType javascript setlocal ts=4 sts=4 sw=4 noexpandtab
+   
+  " Treat .rss files as XML
+  autocmd BufNewFile,BufRead *.rss setfiletype xml
+  " strip trailling whitespace when write
+  autocmd BufWritePre *.py,*.js :call <SID>StripTrailingWhitespaces()
+      
+endif
+nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
+function! <SID>StripTrailingWhitespaces()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+
+function! Preserve(command)
+  " Preparation: save last search, and cursor position.
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " Do the business:
+  execute a:command
+  " Clean up: restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
+endfunction
+" same as strip trailing whitespace
+nmap _$ :call Preserve("%s/\\s\\+$//e")<CR>
+" reformattiong the whole page
+nmap _= :call Preserve("normal gg=G")<CR>
+
+" To add TextMate’s key mappings
+
+nmap <D-[> <<
+nmap <D-]> >>
+vmap <D-[> <gv
+vmap <D-]> >gv
+
+set nrformats=
+" This will cause Vim to treat all numerals as decimal, regardless of whether they are padded with zeros.
