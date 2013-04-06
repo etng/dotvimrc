@@ -76,9 +76,6 @@
 [submodule "bundle/vim-bundle-mako"]
 	path = bundle/vim-bundle-mako
 	url = git://github.com/sophacles/vim-bundle-mako.git
-[submodule "bundle/snipmate-snippets"]
-	path = bundle/snipmate-snippets
-	url = git://github.com/honza/snipmate-snippets.git
 [submodule "bundle/tlib_vim"]
 	path = bundle/tlib_vim
 	url = git://github.com/tomtom/tlib_vim.git
@@ -115,3 +112,6 @@
 [submodule "bundle/indentLine"]
 	path = bundle/indentLine
 	url = git://github.com/Yggdroot/indentLine.git
+[submodule "bundle/vim-snippets"]
+	path = bundle/vim-snippets
+	url = git://github.com/honza/vim-snippets.git
